@@ -23,7 +23,7 @@
                      </viewport></ImageView>
                   <Button fx:id="startCam" layoutX="3.0" layoutY="424.0" mnemonicParsing="false" onAction="#startCamera" prefHeight="55.0" prefWidth="102.0" styleClass="aaa" stylesheets="@application.css" />
                   <Button id="savef" fx:id="saveBtn" disable="true" layoutX="109.0" layoutY="425.0" mnemonicParsing="false" onAction="#saveFace" prefHeight="55.0" prefWidth="91.0" stylesheets="@application.css" />
-                  <Button fx:id="recogniseBtn" disable="true" layoutX="374.0" layoutY="423.0" mnemonicParsing="false" onAction="#faceRecognise" prefHeight="55.0" prefWidth="158.0" style="-fx-background-color: gold;" styleClass="recog" stylesheets="@application.css">
+                  <Button fx:id="recogniseBtn" disable="true" layoutX="374.0" layoutY="423.0" mnemonicParsing="false" onAction="#faceRecognise" prefHeight="55.0" prefWidth="158.0" styleClass="face_rec_off" stylesheets="@application.css">
                      <font>
                         <Font size="10.0" />
                      </font></Button>
@@ -31,7 +31,7 @@
                      <font>
                         <Font size="10.0" />
                      </font></Button>
-                  <Button fx:id="stopBtn" layoutX="7.0" layoutY="426.0" mnemonicParsing="false" onAction="#stopCam" prefHeight="55.0" prefWidth="101.0" styleClass="stop1" stylesheets="@application.css" text="Stop" visible="false" />
+                  <Button fx:id="stopBtn" layoutX="7.0" layoutY="426.0" mnemonicParsing="false" onAction="#stopCam" prefHeight="55.0" prefWidth="101.0" styleClass="stop1" stylesheets="@application.css" visible="false" />
                   <Separator layoutX="252.0" layoutY="411.0" prefWidth="200.0" />
                   <Label fx:id="savedLabel" layoutX="282.0" layoutY="207.0" prefHeight="52.0" prefWidth="215.0" text=" Face  Saved !" underline="true" visible="false">
                      <font>
@@ -52,7 +52,7 @@
                         <Font name="Estrangelo Edessa" size="19.0" />
                      </font>
                   </Label>
-                  <Button fx:id="stopRecBtn" disable="true" layoutX="532.0" layoutY="423.0" mnemonicParsing="false" onAction="#stopRecognise" prefHeight="60.0" prefWidth="89.0" styleClass="stop2" stylesheets="@application.css" text="STOP" textFill="#fa1111">
+                  <Button fx:id="stopRecBtn" disable="true" layoutX="532.0" layoutY="423.0" mnemonicParsing="false" onAction="#stopRecognise" prefHeight="60.0" prefWidth="89.0" styleClass="face_rec_idle" stylesheets="@application.css" textFill="#fa1111">
                      <font>
                         <Font name="Gabriola" size="18.0" />
                      </font></Button>

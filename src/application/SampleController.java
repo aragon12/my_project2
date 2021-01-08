@@ -178,9 +178,9 @@ public class SampleController {
 		fullBodyBtn.setDisable(false);
 		upperBodyBtn.setDisable(false);
 
-		if (stopRecBtn.isDisable()) {
-			stopRecBtn.setDisable(false);
-		}
+		//if (stopRecBtn.isDisable()) {
+		//	stopRecBtn.setDisable(false);
+		//}
 		//*******************************************************************************************
 		
 		
@@ -213,8 +213,16 @@ public class SampleController {
 		
 		faceDetect.setIsRecFace(true);
 		// printOutput(faceDetect.getOutput());
-
-		recogniseBtn.setText("Get Face Data");
+		
+		// enable turn off button
+		stopRecBtn.setDisable(false);
+		
+		//change button image
+		recogniseBtn.getStyleClass().remove("face_rec_off");
+		recogniseBtn.getStyleClass().add("face_rec_on");
+		
+		
+		//recogniseBtn.setText("Get Face Data");
 
 		//Getting detected faces
 		user = faceDetect.getOutput();
@@ -278,8 +286,12 @@ public class SampleController {
 		faceDetect.clearOutput();
 
 		this.user.clear();
-
-		recogniseBtn.setText("Recognise Face");
+		
+		// Change Image
+		recogniseBtn.getStyleClass().remove("face_rec_on");
+		recogniseBtn.getStyleClass().add("face_rec_off");
+		
+		//recogniseBtn.setText("Recognise Face");
 
 		stopRecBtn.setDisable(true);
 
@@ -410,6 +422,7 @@ public class SampleController {
 		smileBtn.setDisable(true);
 		fullBodyBtn.setDisable(true);
 		upperBodyBtn.setDisable(true);
+		motionBtn.setDisable(true);
 		
 		database.db_close();
 		putOnLog("Database Connection Closed");
