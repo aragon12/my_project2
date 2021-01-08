@@ -10,7 +10,7 @@
 
     -fx-min-width: 90px;
 
-    -fx-background-image: url("../onon.png");
+    -fx-background-image: url("../power_off.png");
 
     -fx-background-size: 50px 50px;
 
@@ -81,7 +81,7 @@
     -fx-min-width: 90px;
 
 	
-    -fx-background-image: url("../stop.png");
+    -fx-background-image: url("../power_on.png");
 
     -fx-background-size: 50px 50px;
 
@@ -98,7 +98,7 @@
     -fx-min-width: 90px;
 
 	
-    -fx-background-image: url("../stop.png");
+    -fx-background-image: url("../power_on.png");
 
     -fx-background-size: 50px 50px;
 
@@ -240,9 +240,54 @@
     -fx-background-position: center 7px;
 }
 
+.face_rec_idle
+{
 
+-fx-min-height: 60px;
 
+    -fx-min-width: 90px;
 
+	
+    -fx-background-image: url("../face_rec_idle.png");
+
+    -fx-background-size: 50px 50px;
+
+    -fx-background-repeat: no-repeat;
+
+    -fx-background-position: center 7px;
+}
+
+.face_rec_on
+{
+
+-fx-min-height: 60px;
+
+    -fx-min-width: 90px;
+	
+    -fx-background-image: url("../face_rec_on.png");
+
+    -fx-background-size: 50px 50px;
+
+    -fx-background-repeat: no-repeat;
+
+    -fx-background-position: center 7px;
+}
+
+.face_rec_off
+{
+
+-fx-min-height: 60px;
+
+    -fx-min-width: 90px;
+	
+    -fx-background-image: url("../face_rec_off.png");
+
+    -fx-background-size: 50px 50px;
+
+    -fx-background-repeat: no-repeat;
+
+    -fx-background-position: center 7px;
+}
 
 
 

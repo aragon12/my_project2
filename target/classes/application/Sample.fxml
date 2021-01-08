@@ -13,7 +13,7 @@
 
 <BorderPane prefHeight="720.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <center>
-      <TitledPane alignment="CENTER" collapsible="false" ellipsisString="" lineSpacing="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="712.0" text="exoVisix" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true" BorderPane.alignment="CENTER">
+      <TitledPane alignment="CENTER" collapsible="false" ellipsisString="" lineSpacing="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="712.0" text="Vision Plus" textAlignment="CENTER" textOverrun="LEADING_WORD_ELLIPSIS" wrapText="true" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="749.0">
                <children>
@@ -23,7 +23,7 @@
                      </viewport></ImageView>
                   <Button fx:id="startCam" layoutX="3.0" layoutY="424.0" mnemonicParsing="false" onAction="#startCamera" prefHeight="55.0" prefWidth="102.0" styleClass="aaa" stylesheets="@application.css" />
                   <Button id="savef" fx:id="saveBtn" disable="true" layoutX="109.0" layoutY="425.0" mnemonicParsing="false" onAction="#saveFace" prefHeight="55.0" prefWidth="91.0" stylesheets="@application.css" />
-                  <Button fx:id="recogniseBtn" disable="true" layoutX="374.0" layoutY="423.0" mnemonicParsing="false" onAction="#faceRecognise" prefHeight="55.0" prefWidth="158.0" style="-fx-background-color: gold;" styleClass="recog" stylesheets="@application.css">
+                  <Button fx:id="recogniseBtn" disable="true" layoutX="374.0" layoutY="423.0" mnemonicParsing="false" onAction="#faceRecognise" prefHeight="55.0" prefWidth="158.0" styleClass="face_rec_off" stylesheets="@application.css">
                      <font>
                         <Font size="10.0" />
                      </font></Button>
@@ -31,7 +31,7 @@
                      <font>
                         <Font size="10.0" />
                      </font></Button>
-                  <Button fx:id="stopBtn" layoutX="7.0" layoutY="426.0" mnemonicParsing="false" onAction="#stopCam" prefHeight="55.0" prefWidth="101.0" styleClass="stop1" stylesheets="@application.css" text="Stop" visible="false" />
+                  <Button fx:id="stopBtn" layoutX="7.0" layoutY="426.0" mnemonicParsing="false" onAction="#stopCam" prefHeight="55.0" prefWidth="101.0" styleClass="stop1" stylesheets="@application.css" visible="false" />
                   <Separator layoutX="252.0" layoutY="411.0" prefWidth="200.0" />
                   <Label fx:id="savedLabel" layoutX="282.0" layoutY="207.0" prefHeight="52.0" prefWidth="215.0" text=" Face  Saved !" underline="true" visible="false">
                      <font>
@@ -52,7 +52,7 @@
                         <Font name="Estrangelo Edessa" size="19.0" />
                      </font>
                   </Label>
-                  <Button fx:id="stopRecBtn" disable="true" layoutX="532.0" layoutY="423.0" mnemonicParsing="false" onAction="#stopRecognise" prefHeight="60.0" prefWidth="89.0" styleClass="stop2" stylesheets="@application.css" text="STOP" textFill="#fa1111">
+                  <Button fx:id="stopRecBtn" disable="true" layoutX="532.0" layoutY="423.0" mnemonicParsing="false" onAction="#stopRecognise" prefHeight="60.0" prefWidth="89.0" styleClass="face_rec_idle" stylesheets="@application.css" textFill="#fa1111">
                      <font>
                         <Font name="Gabriola" size="18.0" />
                      </font></Button>
@@ -133,7 +133,7 @@
                      </children></AnchorPane>
                 <AnchorPane fx:id="pdPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Label fx:id="title" layoutX="31.0" layoutY="-1.0" text="Person  Data:">
+                        <Label fx:id="title" layoutX="60.0" layoutY="-1.0" text="Person Data:">
                            <font>
                               <Font name="Vermin Vibes 4 Helium" size="30.0" />
                            </font>
@@ -146,19 +146,19 @@
                               </LinearGradient>
                            </textFill>
                         </Label>
-                        <Label layoutX="29.0" layoutY="70.0" text="FName">
+                        <Label layoutX="29.0" layoutY="70.0" text="First">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                         <TextField fx:id="fname" layoutX="98.0" layoutY="73.0" prefHeight="25.0" prefWidth="181.0" promptText="Enter First Name" />
                         <TextField fx:id="code" layoutX="97.0" layoutY="40.0" prefHeight="25.0" prefWidth="181.0" promptText="Unique Face code" />
-                        <Label layoutX="28.0" layoutY="37.0" text="Code:">
+                        <Label layoutX="28.0" layoutY="37.0" text="Face ID">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="24.0" layoutY="102.0" text="LName">
+                        <Label layoutX="28.0" layoutY="102.0" text="Last">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -171,12 +171,12 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="27.0" layoutY="133.0" text=" Reg .">
+                        <Label layoutX="27.0" layoutY="133.0" text="Roll No">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="reg" layoutX="96.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" promptText="Reg.No" />
+                        <TextField fx:id="reg" layoutX="96.0" layoutY="136.0" prefHeight="25.0" prefWidth="181.0" promptText="Enter Roll no." />
                         <TextField fx:id="age" layoutX="97.0" layoutY="169.0" prefHeight="25.0" prefWidth="181.0" />
                         <Label layoutX="28.0" layoutY="166.0" text="Age">
                            <font>
@@ -191,16 +191,18 @@
          </content></TitledPane>
    </left>
    <right>
+   
       <TitledPane animated="false" prefHeight="524.0" prefWidth="266.0" text="Output" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="338.0">
                <children>
                   <SplitPane layoutX="2.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="496.0" prefWidth="280.0">
                     <items>
-                        <ScrollPane prefHeight="494.0" prefViewportHeight="244.0" prefViewportWidth="328.0" prefWidth="260.0">
-                           <content>
+                        <!--<ScrollPane prefHeight="494.0" prefViewportHeight="244.0" prefViewportWidth="328.0" prefWidth="260.0">
+                           <content>-->
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="310.0">
                                  <children>
+                                    
                                     <Label layoutX="68.0" layoutY="7.0" text="EVENT LOG:">
                                        <font>
                                           <Font name="Vermin Vibes 4 Helium" size="22.0" />
@@ -214,13 +216,21 @@
                                           </LinearGradient>
                                        </textFill>
                                     </Label>
+                                    
                                     <Separator layoutX="77.0" layoutY="37.0" prefHeight="5.0" prefWidth="123.0" />
-                                    <ListView fx:id="logList" editable="true" layoutX="4.0" layoutY="37.0" prefHeight="203.0" prefWidth="256.0" style="-fx-padding: 10;">
+                                    
+                                    <!--LOG Box-->
+                                    <ListView fx:id="logList" editable="true" layoutX="4.0" layoutY="37.0" prefHeight="460.0" prefWidth="256.0" style="-fx-padding: 10;">
                                        <effect>
                                           <Glow />
                                        </effect>
                                     </ListView>
+                                    
+                                    <!-- seperator line
                                     <Separator layoutX="77.0" layoutY="272.0" prefHeight="5.0" prefWidth="123.0" />
+                                    -->
+                                    
+                                    <!-- OCR Heading
                                     <Label layoutX="68.0" layoutY="242.0" text="OCR OUTPUT">
                                        <font>
                                           <Font name="Vermin Vibes 4 Helium" size="22.0" />
@@ -234,6 +244,9 @@
                                           </LinearGradient>
                                        </textFill>
                                     </Label>
+                                    -->
+                                    
+                                    <!-- OCR Box
                                     <ScrollPane layoutX="2.0" layoutY="279.0" prefHeight="204.0" prefWidth="264.0">
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="218.0" prefWidth="252.0">
@@ -243,10 +256,12 @@
                                           </AnchorPane>
                                       </content>
                                     </ScrollPane>
+                                    -->                                
+                                    
                                  </children>
                               </AnchorPane>
-                           </content>
-                        </ScrollPane>
+                           <!--</content>
+                        </ScrollPane>-->
                     </items>
                   </SplitPane>
                </children></AnchorPane>
