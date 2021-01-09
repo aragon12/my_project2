@@ -119,13 +119,13 @@
       </TitledPane>
    </center>
    <left>
-      <TitledPane fx:id="dataPane" disable="true" prefHeight="528.0" prefWidth="302.0" text="Fetched Data" BorderPane.alignment="CENTER">
+      <TitledPane fx:id="dataPane" disable="true" prefHeight="528.0" prefWidth="302.0" text="System Logs" BorderPane.alignment="CENTER">
          <content>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="276.0" prefWidth="300.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <ListView fx:id="output" editable="true" layoutX="4.0" layoutY="4.0" prefHeight="242.0" prefWidth="290.0" style="-fx-padding: 10;">
+                        <ListView fx:id="logList" editable="true" layoutX="4.0" layoutY="4.0" prefHeight="242.0" prefWidth="290.0" style="-fx-padding: 10;">
                            <effect>
                               <Glow />
                            </effect>
@@ -192,7 +192,7 @@
    </left>
    <right>
    
-      <TitledPane animated="false" prefHeight="524.0" prefWidth="266.0" text="Output" BorderPane.alignment="CENTER">
+      <TitledPane animated="false" prefHeight="524.0" prefWidth="266.0" text="Output Tab" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="338.0">
                <children>
@@ -203,7 +203,7 @@
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="310.0">
                                  <children>
                                     
-                                    <Label layoutX="68.0" layoutY="7.0" text="EVENT LOG:">
+                                    <Label layoutX="50.0" layoutY="7.0" text="Attendence Data">
                                        <font>
                                           <Font name="Vermin Vibes 4 Helium" size="22.0" />
                                        </font>
@@ -220,7 +220,7 @@
                                     <Separator layoutX="77.0" layoutY="37.0" prefHeight="5.0" prefWidth="123.0" />
                                     
                                     <!--LOG Box-->
-                                    <ListView fx:id="logList" editable="true" layoutX="4.0" layoutY="37.0" prefHeight="460.0" prefWidth="256.0" style="-fx-padding: 10;">
+                                    <ListView fx:id="output" editable="true" layoutX="4.0" layoutY="37.0" prefHeight="460.0" prefWidth="256.0" style="-fx-padding: 10;">
                                        <effect>
                                           <Glow />
                                        </effect>
