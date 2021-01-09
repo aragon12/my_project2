@@ -163,7 +163,7 @@ public class SampleController {
 		eyeBtn.setDisable(false);
 		stopBtn.setVisible(true);
 		//ocrBtn.setDisable(false);
-		capBtn.setDisable(false);
+		//capBtn.setDisable(false);
 		motionBtn.setDisable(false);
 		gesture.setDisable(false);
 		saveBtn.setDisable(false);
