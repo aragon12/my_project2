@@ -1,5 +1,6 @@
 package application;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -306,28 +308,102 @@ public class SampleController {
 		putOnLog("motion Detector Activated !");
 
 	}
+	
+	private boolean isNumOnly(String str) {
+		
+		return str.matches("^[1-9]\\d*$");		
+	}
+	
+	private boolean isStrOnly(String str) {
+		
+		return str.matches("^[a-zA-Z]*$");		
+	}
+	
+	@FXML
+	protected boolean input_valid( ) {
+		
+		Alert abox = new Alert(AlertType.ERROR);
+		abox.setTitle("Alert");
+		
+		// Check if fields are empty
+		if (code.getText().trim().isEmpty() ||
+				fname.getText().trim().isEmpty() ||
+				lname.getText().trim().isEmpty() ||
+				reg.getText().trim().isEmpty() ||
+				age.getText().trim().isEmpty() ||
+				sec.getText().trim().isEmpty()) {
+			abox.setHeaderText("ERROR: Empty Fields!");
+			abox.setContentText("One (or more) fields in Student Data form are empty."); 
+			abox.show();
+			return false;
+		}
+		
+		//Face Code ID
+		//Check it contains only num
+		if(!isNumOnly(code.getText().trim())) {
+			abox.setHeaderText("ERROR: Invalid Face ID!");
+			abox.setContentText("Face ID only contains Numbers.");
+			abox.show();
+			return false;
+		}
+		
+		//First Name
+		//Check it contains only string
+		if(!isStrOnly(fname.getText().trim())) {
+			abox.setHeaderText("ERROR: Invalid First Name!");
+			abox.setContentText("First Name should only have Alphabets(A-Z) and Does not contain any spaces.");
+			abox.show();
+			return false;
+		}
+		
+		//Last Name
+		//Check it contains only string
+		if(!isStrOnly(lname.getText().trim())) {
+			abox.setHeaderText("ERROR: Invalid Last Name!");
+			abox.setContentText("Last Name should only have Alphabets(A-Z) and Does not contain any spaces.");
+			abox.show();
+			return false;
+		}
+		
+		//Roll NO
+		//Check it contains only num
+		if(!isNumOnly(reg.getText().trim())) {
+			abox.setHeaderText("ERROR: Invalid Roll No!");
+			abox.setContentText("Roll No. only contains Numbers.");
+			abox.show();
+			return false;
+		}
+		
+		//Age
+		//Check it contains only num
+		if(!isNumOnly(age.getText().trim())) {
+			abox.setHeaderText("ERROR: Invalid Age!");
+			abox.setContentText("Age only contains Numbers");
+			abox.show();
+			return false;
+		}
+		
+		//Section
+		//Check it contains only String
+		if(!isStrOnly(sec.getText().trim())) {
+			abox.setHeaderText("ERROR: Invalid Section!");
+			abox.setContentText("Section only contains a single Capital Letter.");
+			abox.show();
+			return false;
+		}
+
+				
+		return true;
+	}
 
 	@FXML
 	protected void saveFace() throws SQLException {
 
 		//Input Validation
-		if (fname.getText().trim().isEmpty() || reg.getText().trim().isEmpty() || code.getText().trim().isEmpty()) {
+		if(!input_valid()) {
+			return;
+		}
 
-			new Thread(() -> {
-
-				try {
-					warning.setVisible(true);
-
-					Thread.sleep(2000);
-
-					warning.setVisible(false);
-
-				} catch (InterruptedException ex) {
-				}
-
-			}).start();
-
-		} else {
 			//Progressbar
 			pb.setVisible(true);
 
@@ -397,8 +473,6 @@ public class SampleController {
 			}).start();
 
 			faceDetect.setSaveFace(true);
-
-		}
 
 	}
 
