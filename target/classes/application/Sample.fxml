@@ -34,7 +34,7 @@
                      </font></Button>
                   -->
                   <Button fx:id="stopBtn" layoutX="7.0" layoutY="426.0" mnemonicParsing="false" onAction="#stopCam" prefHeight="55.0" prefWidth="101.0" styleClass="stop1" stylesheets="@application.css" visible="false" />
-                  <Separator layoutX="252.0" layoutY="411.0" prefWidth="200.0" />
+                  <!--<Separator layoutX="252.0" layoutY="411.0" prefWidth="200.0" />-->
                   <Label fx:id="savedLabel" layoutX="282.0" layoutY="207.0" prefHeight="52.0" prefWidth="215.0" text=" Face  Saved !" underline="true" visible="false">
                      <font>
                         <Font name="Vonique 92" size="25.0" />

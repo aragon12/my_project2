@@ -207,12 +207,48 @@ public class SampleController {
 		
 		//**********************************************************************************************
 	}
-	int count = 0;
+	
+	protected void disp_att_data() {
+		
+		//Getting detected faces
+		user = faceDetect.getOutput();
+		
+		//Retrieved data will be shown in Fetched Data pane
+		String t = "********* Face Data: " + user.get(1) + " " + user.get(2) + " *********";
+		outEvent.add(t);
+
+		String n1 = "First Name\t\t:\t" + user.get(1);
+		outEvent.add(n1);
+
+		String n2 = "Last Name\t\t:\t" + user.get(2);
+		outEvent.add(n2);
+
+		String fc = "Face Code\t\t:\t" + user.get(0);
+		outEvent.add(fc);
+
+		String r = "Reg no\t\t\t:\t" + user.get(3);
+		outEvent.add(r);
+
+		String a = "Age \t\t\t\t:\t" + user.get(4);
+		outEvent.add(a);
+
+		String s = "Section\t\t\t:\t" + user.get(5);
+
+		outEvent.add(s);
+
+		output.setItems(outEvent);
+		
+	}
+	
+	boolean isRecOn = false;
 
 	@FXML
 	protected void faceRecognise() {
 
-		
+		if (isRecOn) {
+			disp_att_data();
+			return;
+		}
 		faceDetect.setIsRecFace(true);
 		// printOutput(faceDetect.getOutput());
 		
@@ -223,62 +259,10 @@ public class SampleController {
 		recogniseBtn.getStyleClass().remove("face_rec_off");
 		recogniseBtn.getStyleClass().add("face_rec_on");
 		
-		
 		//recogniseBtn.setText("Get Face Data");
 
-		//Getting detected faces
-		user = faceDetect.getOutput();
-
-		if (count > 0) {
-
-			//Retrieved data will be shown in Fetched Data pane
-			String t = "********* Face Data: " + user.get(1) + " " + user.get(2) + " *********";
-
-			outEvent.add(t);
-
-			String n1 = "First Name\t\t:\t" + user.get(1);
-
-			outEvent.add(n1);
-
-			output.setItems(outEvent);
-
-			String n2 = "Last Name\t\t:\t" + user.get(2);
-
-			outEvent.add(n2);
-
-			output.setItems(outEvent);
-
-			String fc = "Face Code\t\t:\t" + user.get(0);
-
-			outEvent.add(fc);
-
-			output.setItems(outEvent);
-
-			String r = "Reg no\t\t\t:\t" + user.get(3);
-
-			outEvent.add(r);
-
-			output.setItems(outEvent);
-
-			String a = "Age \t\t\t\t:\t" + user.get(4);
-
-			outEvent.add(a);
-
-			output.setItems(outEvent);
-			String s = "Section\t\t\t:\t" + user.get(5);
-
-			outEvent.add(s);
-
-			output.setItems(outEvent);
-
-		}
-
-		count++;
-
 		putOnLog("Face Recognition Activated !");
-
-		stopRecBtn.setDisable(false);
-
+		isRecOn = true;
 	}
 
 	@FXML
@@ -298,7 +282,7 @@ public class SampleController {
 		stopRecBtn.setDisable(true);
 
 		putOnLog("Face Recognition Deactivated !");
-
+		isRecOn = false;
 	}
 
 	@FXML
