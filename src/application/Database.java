@@ -75,6 +75,82 @@ class Database {
 		}
 
 	}
+	
+	public void insert_stu() {
+		// Insert a new student data
+		// for attendence
+		String sql = "INSERT IGNORE INTO att_data (f_name, l_name, rollno, present) VALUES (?, ?, ?, ?)";
+		PreparedStatement statement = null;
+
+		try {
+			
+			statement = con.prepareStatement(sql);
+			statement.setString(1, this.fname);
+			statement.setString(2, this.Lname);
+			statement.setInt(3, this.reg);
+			statement.setInt(4, 0);
+
+			int rowsInserted = statement.executeUpdate();
+			if (rowsInserted > 0) {
+				System.out.println("A new Student was inserted successfully!");
+			} else {
+				System.out.println("Student already exists");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setPresent(int roll) {
+		//updates attendence status to present
+		// by roll no
+		String sql = "UPDATE att_data SET present=? WHERE rollno=?";
+		PreparedStatement statement = null;
+		
+		try {
+			
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, 1);
+			statement.setInt(2, roll);
+			statement.executeUpdate();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}				
+	}
+	
+	public boolean isStudPresent(int roll) {
+		// Returns if student is present or not
+		if(getAttStat(roll) == 1) {
+			return true;
+		}
+		return false;
+	}
+	
+	public int getAttStat(int roll) {		
+		// Returns the Present/Absent Status of Student
+		// By Roll No
+		String sql = "SELECT present from att_data WHERE rollno=?";
+		int fetch_stat = -1;
+		PreparedStatement statement = null;
+		ResultSet rs =null;
+		
+		try {
+			statement = con.prepareStatement(sql);
+			statement.setInt(1, roll);
+			rs = statement.executeQuery();
+			
+			while(rs.next()) {
+			fetch_stat = rs.getInt(1);
+		}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Roll no: "+roll+" stat: "+fetch_stat);
+		
+		return fetch_stat;
+	}
 
 	public ArrayList<String> getUser(int inCode) throws SQLException {
 

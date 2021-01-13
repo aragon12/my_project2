@@ -31,10 +31,18 @@ CREATE TABLE IF NOT EXISTS `face_bio` (
   `code` int(10) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(20) NOT NULL,
-  `reg` int(10) NOT NULL,
+  `reg` int(20) NOT NULL,
   `age` int(10) NOT NULL,
   `section` varchar(20) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS `att_data` (
+  `f_name` varchar(30) NOT NULL,
+  `l_name` varchar(30) NOT NULL,
+  `rollno` int(20) NOT NULL,
+  `present` int(5) NOT NULL,
+   PRIMARY KEY (rollno)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables

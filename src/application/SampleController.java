@@ -214,28 +214,30 @@ public class SampleController {
 		user = faceDetect.getOutput();
 		
 		//Retrieved data will be shown in Fetched Data pane
-		String t = "********* Face Data: " + user.get(1) + " " + user.get(2) + " *********";
-		outEvent.add(t);
-
-		String n1 = "First Name\t\t:\t" + user.get(1);
-		outEvent.add(n1);
-
-		String n2 = "Last Name\t\t:\t" + user.get(2);
-		outEvent.add(n2);
-
-		String fc = "Face Code\t\t:\t" + user.get(0);
-		outEvent.add(fc);
-
-		String r = "Reg no\t\t\t:\t" + user.get(3);
-		outEvent.add(r);
-
-		String a = "Age \t\t\t\t:\t" + user.get(4);
-		outEvent.add(a);
-
-		String s = "Section\t\t\t:\t" + user.get(5);
-
-		outEvent.add(s);
-
+		String txt = "********* Student Info: *********"
+				+ "\nFirst Name\t\t:\t" + user.get(1)
+				+ "\nLast Name\t\t:\t" + user.get(2)
+				+ "\nFace ID\t\t\t:\t" + user.get(0)
+				+ "\nRoll No\t\t\t:\t" + user.get(3)
+				+ "\nAge \t\t\t\t:\t" + user.get(4)
+				+ "\nSection\t\t\t:\t" + user.get(5);
+		
+		outEvent.add("");
+		outEvent.add(txt);
+		
+		String pp = null;
+		int roll_no = Integer.parseInt(user.get(3));
+		if(database.isStudPresent(roll_no)) {
+			pp = user.get(1) +" " + user.get(2) + " is Already Marked";
+		} else {
+			database.setPresent(roll_no);
+			pp = user.get(1) +" " + user.get(2) + " is Marked as present\nRoll no: " + user.get(3);
+		}		
+		
+		outEvent.add("");
+		outEvent.add(pp);
+		
+		//Display data
 		output.setItems(outEvent);
 		
 	}
@@ -414,6 +416,7 @@ public class SampleController {
 					database.setReg(Integer.parseInt(reg.getText()));
 
 					database.insert();
+					database.insert_stu();
 					
 					javafx.application.Platform.runLater(new Runnable(){
 						
@@ -475,7 +478,7 @@ public class SampleController {
 		recogniseBtn.setDisable(true);
 		saveBtn.setDisable(true);
 		dataPane.setDisable(true);
-		stopRecBtn.setDisable(true);
+		//stopRecBtn.setDisable(true);
 		eyeBtn.setDisable(true);
 		smileBtn.setDisable(true);
 		fullBodyBtn.setDisable(true);
