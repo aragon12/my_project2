@@ -305,11 +305,17 @@ public class SampleController {
 		return str.matches("^[a-zA-Z]*$");		
 	}
 	
-	@FXML
-	protected boolean input_valid( ) {
-		
+	private void invalidAlert(String header, String text) {
+		// Displays popup error alert box
 		Alert abox = new Alert(AlertType.ERROR);
 		abox.setTitle("Alert");
+		abox.setHeaderText("ERROR: "+header+"!");
+		abox.setContentText(text); 
+		abox.show();
+	}
+	
+	@FXML
+	protected boolean input_valid() {
 		
 		// Check if fields are empty
 		if (code.getText().trim().isEmpty() ||
@@ -318,66 +324,51 @@ public class SampleController {
 				reg.getText().trim().isEmpty() ||
 				age.getText().trim().isEmpty() ||
 				sec.getText().trim().isEmpty()) {
-			abox.setHeaderText("ERROR: Empty Fields!");
-			abox.setContentText("One (or more) fields in Student Data form are empty."); 
-			abox.show();
+			invalidAlert("Empty Fields", "One (or more) fields in Student Data form are empty.");
 			return false;
 		}
 		
 		//Face Code ID
 		//Check it contains only num
 		if(!isNumOnly(code.getText().trim())) {
-			abox.setHeaderText("ERROR: Invalid Face ID!");
-			abox.setContentText("Face ID only contains Numbers.");
-			abox.show();
+			invalidAlert("Invalid Face ID", "Face ID only contains Numbers.");
 			return false;
 		}
 		
 		//First Name
 		//Check it contains only string
 		if(!isStrOnly(fname.getText().trim())) {
-			abox.setHeaderText("ERROR: Invalid First Name!");
-			abox.setContentText("First Name should only have Alphabets(A-Z) and Does not contain any spaces.");
-			abox.show();
+			invalidAlert("Invalid First Name", "First Name should only have Alphabets(A-Z) and Does not contain any spaces.");
 			return false;
 		}
 		
 		//Last Name
 		//Check it contains only string
 		if(!isStrOnly(lname.getText().trim())) {
-			abox.setHeaderText("ERROR: Invalid Last Name!");
-			abox.setContentText("Last Name should only have Alphabets(A-Z) and Does not contain any spaces.");
-			abox.show();
+			invalidAlert("Invalid Last Name", "Last Name should only have Alphabets(A-Z) and Does not contain any spaces.");
 			return false;
 		}
 		
 		//Roll NO
 		//Check it contains only num
 		if(!isNumOnly(reg.getText().trim())) {
-			abox.setHeaderText("ERROR: Invalid Roll No!");
-			abox.setContentText("Roll No. only contains Numbers.");
-			abox.show();
+			invalidAlert("Invalid Roll No", "Roll No. only contains Numbers.");
 			return false;
 		}
 		
 		//Age
 		//Check it contains only num
 		if(!isNumOnly(age.getText().trim())) {
-			abox.setHeaderText("ERROR: Invalid Age!");
-			abox.setContentText("Age only contains Numbers");
-			abox.show();
+			invalidAlert("Invalid Age","Age only contains Numbers");
 			return false;
 		}
 		
 		//Section
 		//Check it contains only String
 		if(!isStrOnly(sec.getText().trim())) {
-			abox.setHeaderText("ERROR: Invalid Section!");
-			abox.setContentText("Section only contains a single Capital Letter.");
-			abox.show();
+			invalidAlert("Invalid Section", "Section only contains a single Capital Letter.");
 			return false;
 		}
-
 				
 		return true;
 	}
