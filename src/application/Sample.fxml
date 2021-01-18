@@ -99,8 +99,8 @@
                         <Font size="10.0" />
                      </font>
                   </Button>
-                  <Button fx:id="smileBtn" disable="true" layoutX="621.0" layoutY="259.0" mnemonicParsing="false" onAction="#smileStart" prefHeight="56.0" prefWidth="86.0" styleClass="smiles" stylesheets="@application.css" text="Smile" />
-                  <Button fx:id="fullBodyBtn" disable="true" layoutX="621.0" layoutY="322.0" mnemonicParsing="false" onAction="#fullBodyStart" prefHeight="56.0" prefWidth="86.0" styleClass="fullbody" stylesheets="@application.css">
+                  <Button fx:id="fullBodyBtn" disable="true" layoutX="621.0" layoutY="259.0" mnemonicParsing="false" onAction="#fullBodyStart" prefHeight="56.0" prefWidth="86.0" styleClass="fullbody" stylesheets="@application.css" />
+                  <Button fx:id="showAttBtn" disable="true" layoutX="621.0" layoutY="322.0" mnemonicParsing="false" onAction="#showAttData" prefHeight="56.0" prefWidth="86.0" styleClass="attList" stylesheets="@application.css">
                      <font>
                         <Font size="11.0" />
                      </font>

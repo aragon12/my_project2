@@ -2,7 +2,6 @@ package application;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -18,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -30,20 +28,14 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
 
-import application.FaceDetector;
-import application.Database;
-import application.OCR;
-import application.Database;
-
 public class SampleController {
 
-	//**********************************************************************************************
-	//Mention The file location path where the face will be saved & retrieved
-	
-	public String filePath="./faces";
-	
-	
-	//**********************************************************************************************
+	// **********************************************************************************************
+	// Mention The file location path where the face will be saved & retrieved
+
+	public String filePath = "./faces";
+
+	// **********************************************************************************************
 	@FXML
 	private Button startCam;
 	@FXML
@@ -59,7 +51,7 @@ public class SampleController {
 	@FXML
 	private Button fullBodyBtn;
 	@FXML
-	private Button smileBtn;
+	private Button showAttBtn;
 	@FXML
 	private Button gesture;
 	@FXML
@@ -111,22 +103,21 @@ public class SampleController {
 	@FXML
 	public TextFlow ocr;
 //**********************************************************************************************
-	FaceDetector faceDetect = new FaceDetector();	//Creating Face detector object									
-	ColoredObjectTracker cot = new ColoredObjectTracker(); //Creating Color Object Tracker object		
-	Database database = new Database();		//Creating Database object
+	FaceDetector faceDetect = new FaceDetector(); // Creating Face detector object
+	ColoredObjectTracker cot = new ColoredObjectTracker(); // Creating Color Object Tracker object
+	Database database = new Database(); // Creating Database object
 
 	OCR ocrObj = new OCR();
 	ArrayList<String> user = new ArrayList<String>();
 	ImageView imageView1;
-	
+
 	public static ObservableList<String> event = FXCollections.observableArrayList();
 	public static ObservableList<String> outEvent = FXCollections.observableArrayList();
 
 	public boolean enabled = false;
 	public boolean isDBready = false;
 
-	
-	//**********************************************************************************************
+	// **********************************************************************************************
 	public void putOnLog(String data) {
 
 		Instant now = Instant.now();
@@ -142,8 +133,8 @@ public class SampleController {
 	@FXML
 	protected void startCamera() throws SQLException {
 
-		//*******************************************************************************************
-		//initializing objects from start camera button event
+		// *******************************************************************************************
+		// initializing objects from start camera button event
 		faceDetect.init();
 
 		faceDetect.setFrame(frame);
@@ -159,13 +150,13 @@ public class SampleController {
 			putOnLog("Success: Database Connection Succesful ! ");
 		}
 
-		//*******************************************************************************************
-		//Activating other buttons
+		// *******************************************************************************************
+		// Activating other buttons
 		startCam.setVisible(false);
 		eyeBtn.setDisable(false);
 		stopBtn.setVisible(true);
-		//ocrBtn.setDisable(false);
-		//capBtn.setDisable(false);
+		// ocrBtn.setDisable(false);
+		// capBtn.setDisable(false);
 		motionBtn.setDisable(false);
 		gesture.setDisable(false);
 		saveBtn.setDisable(false);
@@ -176,72 +167,67 @@ public class SampleController {
 
 		dataPane.setDisable(false);
 		// shapeBtn.setDisable(false);
-		smileBtn.setDisable(false);
+		showAttBtn.setDisable(false);
 		fullBodyBtn.setDisable(false);
 		upperBodyBtn.setDisable(false);
 
-		//if (stopRecBtn.isDisable()) {
-		//	stopRecBtn.setDisable(false);
-		//}
-		//*******************************************************************************************
-		
-		
+		// if (stopRecBtn.isDisable()) {
+		// stopRecBtn.setDisable(false);
+		// }
+		// *******************************************************************************************
+
 		tile.setPadding(new Insets(15, 15, 55, 15));
 		tile.setHgap(30);
-		
-		//**********************************************************************************************
-		//Picture Gallary
-		
+
+		// **********************************************************************************************
+		// Picture Gallary
+
 		String path = filePath;
 
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
-		
-		//Image reader from the mentioned folder
+
+		// Image reader from the mentioned folder
 		for (final File file : listOfFiles) {
 
 			imageView1 = createImageView(file);
 			tile.getChildren().addAll(imageView1);
 		}
 		putOnLog(" Real Time WebCam Stream Started !");
-		
-		//**********************************************************************************************
+
+		// **********************************************************************************************
 	}
-	
+
 	protected void disp_att_data() {
-		
-		//Getting detected faces
+
+		// Getting detected faces
 		user = faceDetect.getOutput();
-		
-		//Retrieved data will be shown in Fetched Data pane
-		String txt = "********* Student Info: *********"
-				+ "\nFirst Name\t\t:\t" + user.get(1)
-				+ "\nLast Name\t\t:\t" + user.get(2)
-				+ "\nFace ID\t\t\t:\t" + user.get(0)
-				+ "\nRoll No\t\t\t:\t" + user.get(3)
-				+ "\nAge \t\t\t\t:\t" + user.get(4)
-				+ "\nSection\t\t\t:\t" + user.get(5);
-		
+
+		// Retrieved data will be shown in Fetched Data pane
+		String txt = "********* Student Info: *********" + "\nFirst Name\t\t:\t" + user.get(1) + "\nLast Name\t\t:\t"
+				+ user.get(2) + "\nFace ID\t\t\t:\t" + user.get(0) + "\nRoll No\t\t\t:\t" + user.get(3)
+				+ "\nAge \t\t\t\t:\t" + user.get(4) + "\nSection\t\t\t:\t" + user.get(5);
+
 		outEvent.add("");
 		outEvent.add(txt);
-		
+
 		String pp = null;
 		int roll_no = Integer.parseInt(user.get(3));
-		if(database.isStudPresent(roll_no)) {
-			pp = user.get(1) +" " + user.get(2) + " is Already Marked";
+		if (database.isStudPresent(roll_no)) {
+			pp = user.get(1) + " " + user.get(2) + " is Already Marked";
 		} else {
 			database.setPresent(roll_no);
-			pp = user.get(1) +" " + user.get(2) + " is Marked as present\nRoll no: " + user.get(3);
-		}		
-		
+			pp = user.get(1) + " " + user.get(2) + " is Marked as present\nRoll no: " + user.get(3);
+		}
+
 		outEvent.add("");
 		outEvent.add(pp);
-		
-		//Display data
+
+		// Display data
 		output.setItems(outEvent);
-		
+
 	}
-	
+
 	boolean isRecOn = false;
 
 	@FXML
@@ -253,15 +239,15 @@ public class SampleController {
 		}
 		faceDetect.setIsRecFace(true);
 		// printOutput(faceDetect.getOutput());
-		
+
 		// enable turn off button
 		stopRecBtn.setDisable(false);
-		
-		//change button image
+
+		// change button image
 		recogniseBtn.getStyleClass().remove("face_rec_off");
 		recogniseBtn.getStyleClass().add("face_rec_on");
-		
-		//recogniseBtn.setText("Get Face Data");
+
+		// recogniseBtn.setText("Get Face Data");
 
 		putOnLog("Face Recognition Activated !");
 		isRecOn = true;
@@ -274,12 +260,12 @@ public class SampleController {
 		faceDetect.clearOutput();
 
 		this.user.clear();
-		
+
 		// Change Image
 		recogniseBtn.getStyleClass().remove("face_rec_on");
 		recogniseBtn.getStyleClass().add("face_rec_off");
-		
-		//recogniseBtn.setText("Recognise Face");
+
+		// recogniseBtn.setText("Recognise Face");
 
 		stopRecBtn.setDisable(true);
 
@@ -294,163 +280,152 @@ public class SampleController {
 		putOnLog("motion Detector Activated !");
 
 	}
-	
+
 	private boolean isNumOnly(String str) {
-		
-		return str.matches("^[1-9]\\d*$");		
+
+		return str.matches("^[1-9]\\d*$");
 	}
-	
+
 	private boolean isStrOnly(String str) {
-		
-		return str.matches("^[a-zA-Z]*$");		
+
+		return str.matches("^[a-zA-Z]*$");
 	}
-	
+
 	private void invalidAlert(String header, String text) {
 		// Displays popup error alert box
 		Alert abox = new Alert(AlertType.ERROR);
 		abox.setTitle("Alert");
-		abox.setHeaderText("ERROR: "+header+"!");
-		abox.setContentText(text); 
+		abox.setHeaderText("ERROR: " + header + "!");
+		abox.setContentText(text);
 		abox.show();
 	}
-	
+
 	@FXML
 	protected boolean input_valid() {
-		
+
 		// Check if fields are empty
-		if (code.getText().trim().isEmpty() ||
-				fname.getText().trim().isEmpty() ||
-				lname.getText().trim().isEmpty() ||
-				reg.getText().trim().isEmpty() ||
-				age.getText().trim().isEmpty() ||
-				sec.getText().trim().isEmpty()) {
+		if (code.getText().trim().isEmpty() || fname.getText().trim().isEmpty() || lname.getText().trim().isEmpty()
+				|| reg.getText().trim().isEmpty() || age.getText().trim().isEmpty() || sec.getText().trim().isEmpty()) {
 			invalidAlert("Empty Fields", "One (or more) fields in Student Data form are empty.");
 			return false;
 		}
-		
-		//Face Code ID
-		//Check it contains only num
-		if(!isNumOnly(code.getText().trim())) {
+
+		// Face Code ID
+		// Check it contains only num
+		if (!isNumOnly(code.getText().trim())) {
 			invalidAlert("Invalid Face ID", "Face ID only contains Numbers.");
 			return false;
 		}
-		
-		//First Name
-		//Check it contains only string
-		if(!isStrOnly(fname.getText().trim())) {
-			invalidAlert("Invalid First Name", "First Name should only have Alphabets(A-Z) and Does not contain any spaces.");
+
+		// First Name
+		// Check it contains only string
+		if (!isStrOnly(fname.getText().trim())) {
+			invalidAlert("Invalid First Name",
+					"First Name should only have Alphabets(A-Z) and Does not contain any spaces.");
 			return false;
 		}
-		
-		//Last Name
-		//Check it contains only string
-		if(!isStrOnly(lname.getText().trim())) {
-			invalidAlert("Invalid Last Name", "Last Name should only have Alphabets(A-Z) and Does not contain any spaces.");
+
+		// Last Name
+		// Check it contains only string
+		if (!isStrOnly(lname.getText().trim())) {
+			invalidAlert("Invalid Last Name",
+					"Last Name should only have Alphabets(A-Z) and Does not contain any spaces.");
 			return false;
 		}
-		
-		//Roll NO
-		//Check it contains only num
-		if(!isNumOnly(reg.getText().trim())) {
+
+		// Roll NO
+		// Check it contains only num
+		if (!isNumOnly(reg.getText().trim())) {
 			invalidAlert("Invalid Roll No", "Roll No. only contains Numbers.");
 			return false;
 		}
-		
-		//Age
-		//Check it contains only num
-		if(!isNumOnly(age.getText().trim())) {
-			invalidAlert("Invalid Age","Age only contains Numbers");
+
+		// Age
+		// Check it contains only num
+		if (!isNumOnly(age.getText().trim())) {
+			invalidAlert("Invalid Age", "Age only contains Numbers");
 			return false;
 		}
-		
-		//Section
-		//Check it contains only String
-		if(!isStrOnly(sec.getText().trim())) {
+
+		// Section
+		// Check it contains only String
+		if (!isStrOnly(sec.getText().trim())) {
 			invalidAlert("Invalid Section", "Section only contains a single Capital Letter.");
 			return false;
 		}
-				
+
 		return true;
 	}
 
 	@FXML
 	protected void saveFace() throws SQLException {
 
-		//Input Validation
-		if(!input_valid()) {
+		// Input Validation
+		if (!input_valid()) {
 			return;
 		}
 
-			//Progressbar
-			pb.setVisible(true);
+		// Progressbar
+		pb.setVisible(true);
 
-			savedLabel.setVisible(true);
+		savedLabel.setVisible(true);
 
-			new Thread(() -> {
+		new Thread(() -> {
 
-				try {
+			try {
 
-					faceDetect.setFname(fname.getText());
+				faceDetect.setFname(fname.getText());
 
-					faceDetect.setFname(fname.getText());
-					faceDetect.setLname(lname.getText());
-					faceDetect.setAge(Integer.parseInt(age.getText()));
-					faceDetect.setCode(Integer.parseInt(code.getText()));
-					faceDetect.setSec(sec.getText());
-					faceDetect.setReg(Integer.parseInt(reg.getText()));
+				faceDetect.setFname(fname.getText());
+				faceDetect.setLname(lname.getText());
+				faceDetect.setAge(Integer.parseInt(age.getText()));
+				faceDetect.setCode(Integer.parseInt(code.getText()));
+				faceDetect.setSec(sec.getText());
+				faceDetect.setReg(Integer.parseInt(reg.getText()));
 
-					database.setFname(fname.getText());
-					database.setLname(lname.getText());
-					database.setAge(Integer.parseInt(age.getText()));
-					database.setCode(Integer.parseInt(code.getText()));
-					database.setSec(sec.getText());
-					database.setReg(Integer.parseInt(reg.getText()));
+				database.setFname(fname.getText());
+				database.setLname(lname.getText());
+				database.setAge(Integer.parseInt(age.getText()));
+				database.setCode(Integer.parseInt(code.getText()));
+				database.setSec(sec.getText());
+				database.setReg(Integer.parseInt(reg.getText()));
 
-					database.insert();
-					database.insert_stu();
-					
-					javafx.application.Platform.runLater(new Runnable(){
-						
-						@Override
-						 public void run() {
-							pb.setProgress(100);
-						 }
-						 });
+				database.insert();
+				database.insert_stu();
 
+				javafx.application.Platform.runLater(new Runnable() {
 
-					
+					@Override
+					public void run() {
+						pb.setProgress(100);
+					}
+				});
 
-					savedLabel.setVisible(true);
-					Thread.sleep(2000);
-					
-					javafx.application.Platform.runLater(new Runnable(){
-						
-						@Override
-						 public void run() {
-							pb.setVisible(false);
-						 }
-						 });
+				savedLabel.setVisible(true);
+				Thread.sleep(2000);
 
-				
-					
-					
+				javafx.application.Platform.runLater(new Runnable() {
 
-					
-					
-					javafx.application.Platform.runLater(new Runnable(){
-						
-						@Override
-						 public void run() {
-					 savedLabel.setVisible(false);
-						 }
-						 });
+					@Override
+					public void run() {
+						pb.setVisible(false);
+					}
+				});
 
-				} catch (InterruptedException ex) {
-				}
+				javafx.application.Platform.runLater(new Runnable() {
 
-			}).start();
+					@Override
+					public void run() {
+						savedLabel.setVisible(false);
+					}
+				});
 
-			faceDetect.setSaveFace(true);
+			} catch (InterruptedException ex) {
+			}
+
+		}).start();
+
+		faceDetect.setSaveFace(true);
 
 	}
 
@@ -469,16 +444,16 @@ public class SampleController {
 		recogniseBtn.setDisable(true);
 		saveBtn.setDisable(true);
 		dataPane.setDisable(true);
-		//stopRecBtn.setDisable(true);
+		// stopRecBtn.setDisable(true);
 		eyeBtn.setDisable(true);
-		smileBtn.setDisable(true);
+		showAttBtn.setDisable(true);
 		fullBodyBtn.setDisable(true);
 		upperBodyBtn.setDisable(true);
 		motionBtn.setDisable(true);
-		
+
 		database.db_close();
 		putOnLog("Database Connection Closed");
-		isDBready=false;
+		isDBready = false;
 	}
 
 	@FXML
@@ -546,10 +521,11 @@ public class SampleController {
 	}
 
 	@FXML
-	protected void smileStart() {
+	protected void showAttData() {
 
-		faceDetect.setSmile(true);
-		smileBtn.setDisable(true);
+		// initialize the att table window
+		AttTable att = new AttTable();
+		att.initialize();
 
 	}
 

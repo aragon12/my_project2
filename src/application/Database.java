@@ -2,7 +2,6 @@ package application;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 class Database {
 	public int code;
@@ -75,7 +74,7 @@ class Database {
 		}
 
 	}
-	
+
 	public void insert_stu() {
 		// Insert a new student data
 		// for attendence
@@ -83,7 +82,7 @@ class Database {
 		PreparedStatement statement = null;
 
 		try {
-			
+
 			statement = con.prepareStatement(sql);
 			statement.setString(1, this.fname);
 			statement.setString(2, this.Lname);
@@ -100,55 +99,74 @@ class Database {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public ResultSet db_get_data() {
+		// fetches all records from att_data
+		// and returns resultset
+		String sql = "SELECT * FROM att_data";
+
+		// Extracting data from Databasee
+		ResultSet resultset = null;
+		PreparedStatement statement = null;
+		try {
+			statement = con.prepareStatement(sql);
+			resultset = statement.executeQuery();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return resultset;
+	}
+
 	public void setPresent(int roll) {
-		//updates attendence status to present
+		// updates attendence status to present
 		// by roll no
 		String sql = "UPDATE att_data SET present=? WHERE rollno=?";
 		PreparedStatement statement = null;
-		
+
 		try {
-			
+
 			statement = con.prepareStatement(sql);
 			statement.setInt(1, 1);
 			statement.setInt(2, roll);
-			statement.executeUpdate();			
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}				
+		}
 	}
-	
+
 	public boolean isStudPresent(int roll) {
 		// Returns if student is present or not
-		if(getAttStat(roll) == 1) {
+		if (getAttStat(roll) == 1) {
 			return true;
 		}
 		return false;
 	}
-	
-	public int getAttStat(int roll) {		
+
+	public int getAttStat(int roll) {
 		// Returns the Present/Absent Status of Student
 		// By Roll No
 		String sql = "SELECT present from att_data WHERE rollno=?";
 		int fetch_stat = -1;
 		PreparedStatement statement = null;
-		ResultSet rs =null;
-		
+		ResultSet rs = null;
+
 		try {
 			statement = con.prepareStatement(sql);
 			statement.setInt(1, roll);
 			rs = statement.executeQuery();
-			
-			while(rs.next()) {
-			fetch_stat = rs.getInt(1);
-		}
-		
+
+			while (rs.next()) {
+				fetch_stat = rs.getInt(1);
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("Roll no: "+roll+" stat: "+fetch_stat);
-		
+
+		System.out.println("Roll no: " + roll + " stat: " + fetch_stat);
+
 		return fetch_stat;
 	}
 
@@ -158,12 +176,8 @@ class Database {
 
 		try {
 
-			Database app = new Database();
-
 			String sql = "select * from face_bio where code=" + inCode + " limit 1";
-
 			Statement s = con.createStatement();
-
 			ResultSet rs = s.executeQuery(sql);
 
 			while (rs.next()) {
@@ -182,12 +196,9 @@ class Database {
 				user.add(5, rs.getString(7));
 
 				/*
-				 * System.out.println(app.getCode());
-				 * System.out.println(app.getFname());
-				 * System.out.println(app.getLname());
-				 * System.out.println(app.getReg());
-				 * System.out.println(app.getAge());
-				 * System.out.println(app.getSec());
+				 * System.out.println(app.getCode()); System.out.println(app.getFname());
+				 * System.out.println(app.getLname()); System.out.println(app.getReg());
+				 * System.out.println(app.getAge()); System.out.println(app.getSec());
 				 */
 
 				// nString="Name:" + rs.getString(3)+" "+rs.getString(4) +
@@ -204,8 +215,7 @@ class Database {
 		return user;
 	}
 
-	public void db_close() throws SQLException
-	{
+	public void db_close() throws SQLException {
 		try {
 			con.close();
 		} catch (SQLException e) {
@@ -213,8 +223,7 @@ class Database {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public int getCode() {
 		return code;
 	}
